@@ -80,19 +80,19 @@ type = internal/bspwm
 
 label-focused = 
 label-focused-foreground = ${colors.primary}
-label-focused-padding = 2
+label-focused-padding = 1 
 
 label-occupied = 
 label-occupied-foreground = ${colors.foreground}
-label-occupied-padding = 2
+label-occupied-padding = 1
 
 label-urgent = 
 label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
+label-urgent-padding = 1
 
 label-empty = 
 label-empty-foreground = #787c82
-label-empty-padding = 2
+label-empty-padding = 1
 
 [module/date]
 type = internal/date
@@ -110,7 +110,7 @@ label = %date% at %time%
 [module/spotify1]
 ;https://github.com/NicholasFeldman/dotfiles/blob/master/polybar/.config/polybar/spotify.sh
 type = custom/script
-exec = ~/.config/polybar/scripts/spotify1.sh
+exec = ~/.configi/bspwm/polybar/scripts/spotify1.sh
 interval = 1
 ;format = <label>
 format-foreground = ${colors.foreground}

@@ -36,12 +36,13 @@ bspc config presel_feedback_color	"#5e81ac"
 #bspc config urgent_border_color 	"#dd2727"
 
 #Monitors
-bspc monitor LVDS-1 -d 1 2 3 4 5
-bspc monitor HDMI-1 -d 6 7 8 9 10 11
+#bspc monitor LVDS-1 -d 1 2 3 4 5
+#bspc monitor HDMI-1 -d 6 7 8 9 10 11
+bspc monitor Virtual-1 -d 1 2 3 5 6 7 8
 
 #Fullscreen applications
 bspc rule -a inkscape state=fullscreen
-bspc rule -a Spotify desktop=^6 state=fullscreen
+bspc rule -a Spotify desktop=^8 state=fullscreen
 bspc rule -a Vlc state=fullscreen
 bspc rule -a VirtualBox Manager state=fullscreen
 bspc rule -a VirtualBox Machine state=fullscreen
@@ -58,11 +59,10 @@ bspc rule -a Galculator state=floating
 bspc rule -a Nitrogen state=floating
 bspc rule -a Oblogout state=floating
 #bspc rule -a rofi state=floating sticky=on
-bspc rule -a Xfce4-terminal state=floating
 
 #Tiled applications
 bspc rule -a Gnome-disks state=tiled
 bspc rule -a Xfce4-settings-manager state=tiled
 
 #Focus windows on startup
-bspc desktop -f ^7
+#bspc desktop -f ^7

@@ -48,4 +48,8 @@ super + {b, ctrl + f, ctrl + shift + f, s, space}
 
 # logout
 super + x
-    arcolinux-logout
+    archlinux-logout
+
+# volume control
+super + v + {u,d}
+	pactl -- set-sink-volume 0 {+10%, -10%}
