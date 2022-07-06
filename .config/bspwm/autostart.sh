@@ -28,7 +28,7 @@ xsetroot -cursor_name left_ptr &
 
 run xfce4-power-manager &
 picom --config $HOME/.config/bspwm/picom.conf &
-xrandr -s 1440x900 & 
+#xrandr -s 1920x1080 & 
 nitrogen --restore &
 #run caffeine &
 #run vivaldi-stable &
