@@ -110,7 +110,7 @@ label = %date% at %time%
 [module/spotify1]
 ;https://github.com/NicholasFeldman/dotfiles/blob/master/polybar/.config/polybar/spotify.sh
 type = custom/script
-exec = ~/.configi/bspwm/polybar/scripts/spotify1.sh
+exec = ~/.config/bspwm/polybar/scripts/spotify1.sh
 interval = 1
 ;format = <label>
 format-foreground = ${colors.foreground}
