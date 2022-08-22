@@ -342,3 +342,6 @@ neofetch
 #colorscript random
 
 eval "$(starship init bash)"
+export PATH=$PATH:/home/jj/.spicetify
+
+[ -f "/home/jj/.ghcup/env" ] && source "/home/jj/.ghcup/env" # ghcup-env

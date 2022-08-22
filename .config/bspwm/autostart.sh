@@ -26,10 +26,13 @@ run sxhkd -c ~/.config/bspwm/sxhkd/sxhkdrc &
 
 xsetroot -cursor_name left_ptr &
 
+pamixer --set-volume 55 &
+
 run xfce4-power-manager &
-picom --config $HOME/.config/bspwm/picom.conf &
+picom --config $HOME/.config/picom.conf --experimental-backends &
 #xrandr -s 1920x1080 & 
 nitrogen --restore &
+dunst &
 #run caffeine &
 #run vivaldi-stable &
 #run firefox &
@@ -37,5 +40,5 @@ nitrogen --restore &
 #run dropbox &
 #run insync start &
 #run discord &
-run spotify &
+#run spotify &
 #run atom &

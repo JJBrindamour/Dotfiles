@@ -19,32 +19,54 @@ super + {t, shift + t, f, shift + f}
         bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 # expand a window by moving one of its side outward
-super + alt + {h,j,k,l}
+ctrl + alt + {Left,Down,Up,Right}
         bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
 
 # preselect the direction
-super + ctrl + {h,j,k,l}
+alt + {Left,Down,Up,Right}
 	bspc node -p {west,south,north,east}
 
 # preselect the ratio
-super + ctrl + {1-9}
+ctrl + alt + {1-9}
 	bspc node -o 0.{1-9}
 
 # contract a window by moving one of its side inward
-super + alt + shift + {h,j,k,l}
+ctrl + alt + shift + {Left,Down,Up,Right}
 	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 
 # move a floating window
-super + {Left,Down,Up,Right}
+ctrl + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
 # focus or send a window to the given desktop
-super + {_,shift + }{1-5,m,6,7,8,9,0}
-        bspc {desktop -f,node -d} '^{1-5,6,7,8,9,10,11}'
+super + {_,shift + }{1-9,0}
+        bspc {desktop -f,node -d} '^{1-9,10}'
+
+# music
+super + {_,ctrl} + m
+	bspc desktop -f '^11' && pgrep spotify {|| spotify,&& killall spotify; sleep 1 &&  spotify}
+
+# cycle monitors
+super + bracket{left,right}
+	bspc monitor -f {prev,next}
+
+# cycle desktops
+super + {Left,Right}
+	bspc desktop -f {prev,next}
+
+super + shift + {Left,Right}
+	{bspc node -d prev && bspc desktop -f prev,bspc node -d next && bspc desktop -f next} 
+
+super + ctrl + {Left,Right}
+	bspc node -d {prev,next}
+
+# cycle nodes
+shift + {Left,Down,Up,Right}
+	bspc node -f {west,south,north,east}
 
 # apps
-super + {b, ctrl + f, ctrl + shift + f, s, space}
-	{firefox, pcmanfm, ranger, spotify, dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'}
+super + {b, ctrl + f, ctrl + shift + f, space, shift + space}
+	{firefox, pcmanfm, ranger, rofi -show run, rofi -show run -config ~/.config/rofi/config-center.rasi}
 
 # logout
 super + x
@@ -52,4 +74,13 @@ super + x
 
 # volume control
 super + v + {u,d}
-	pactl -- set-sink-volume 0 {+10%, -10%}
+	pamixer {-i,-d} 5
+
+XF86AudioRaiseVolume
+	pamixer -i 5
+
+XF86AudioLowerVolume
+	pamixer -d 5
+
+XF86AudioMute
+	pamixer -t

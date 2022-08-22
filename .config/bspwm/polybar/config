@@ -1,21 +1,19 @@
 [colors]
-;background = ${xrdb:color0:#222}
-background = #bbc1cb
-;foreground = ${xrdb:color7:#222}
-foreground = #1e2127
-primary = #e06c75
-alert = #c678dd
+background = #cc282a36
+foreground = #bd93f9
+disabled = #44475a
+primary = #f1fa8c
+alert = #ff79c6
 
 [bar/mainbar]
 monitor = ${env:MONITOR:LVDS-1}
 width = 98%
-height = 27
+height = 30
 offset-x = 1%
 offset-y = 1%
 radius = 9
 fixed-center = true
 bottom = false
-seperator = |
 
 enable-ipc = true
 
@@ -25,22 +23,22 @@ foreground = ${colors.foreground}
 line-size = 3
 line-color = #f00
 
-;border-size = 4
-;border-color = #00000000
+border-size = 2 
+border-color = ${colors.foreground}
 
 padding-left = 2
 padding-right = 2
 
-module-margin-left = 2
-module-margin-right = 2
+module-margin-left = 1 
+module-margin-right = 0.5
 
-font-0 = "Fira Code:size=10.5;3"
-font-1 = "FiraCode Nerd Font:size=12;2"
-font-2 = "FontAwesome:size=13;4"
+font-0 = "Fira Code:size=10.5:style=Bold;3"
+font-1 = "FiraCode Nerd Font:size=12:style=Bold;2"
+font-2 = "FontAwesome:size=13:style=Bold;4"
 
 modules-left = bspwm xwindow
-modules-center = date
-modules-right = spotify1
+modules-center = date 
+modules-right = spotify1 volume
 
 tray-position = none
 tray-padding = 2
@@ -78,20 +76,23 @@ label-unmounted-foreground = ${colors.foreground}
 [module/bspwm]
 type = internal/bspwm
 
-label-focused = 
+ws-icon-0 = 11;
+ws-icon-default = 
+
+label-focused = %icon%
 label-focused-foreground = ${colors.primary}
 label-focused-padding = 1 
 
-label-occupied = 
+label-occupied = %icon%
 label-occupied-foreground = ${colors.foreground}
 label-occupied-padding = 1
 
-label-urgent = 
+label-urgent = %icon%
 label-urgent-background = ${colors.alert}
 label-urgent-padding = 1
 
-label-empty = 
-label-empty-foreground = #787c82
+label-empty = %icon%
+label-empty-foreground = ${colors.disabled}
 label-empty-padding = 1
 
 [module/date]
@@ -106,6 +107,14 @@ time-alt = %H:%M:%S
 
 label = %date% at %time%
 
+[module/volume]
+type = custom/script
+label = "%output%"
+exec = ~/.config/bspwm/polybar/scripts/volume.sh
+interval = 0.25 
+click-left = pamixer -t
+scroll-up = pamixer -i 5
+scroll-down = pamixer -d 5
 
 [module/spotify1]
 ;https://github.com/NicholasFeldman/dotfiles/blob/master/polybar/.config/polybar/spotify.sh
@@ -117,7 +126,7 @@ format-foreground = ${colors.foreground}
 format-padding = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground}
-label = %output:0:150%
+label = %output:0:38:...%
 click-left = playerctl play-pause -p spotify
 
 [settings]
