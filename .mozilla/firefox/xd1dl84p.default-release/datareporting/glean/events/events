@@ -1,0 +1,2 @@
+{"timestamp":3934140,"category":"nimbus_events","name":"validation_failed","extra":{"feature":"dapTelemetry","reason":"invalid-feature","experiment":"dap-telemetry-first-ingress-test"}}
+{"timestamp":3940920,"category":"perf","name":"page_load","extra":{"load_type":"HISTORY","js_exec_time":"379","load_time":"1660","response_time":"752","fcp_time":"1374"}}
