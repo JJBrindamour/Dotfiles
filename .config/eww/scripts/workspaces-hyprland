@@ -1,0 +1,39 @@
+#!/bin/bash
+
+icons=("" "" "" "" "" "" "" "" "" "")
+class=("" "" "" "" "" "" "" "" "" "" "")
+
+activewin=$(hyprctl activewindow | grep -Po "(?<=Window ).*(?= ->)")
+if [[ "$activewin" == "" ]]; then
+  activewin="0"
+fi
+
+activeworkspace=$(hyprctl workspaces | pcregrep -Mo "(?<=workspace ID )(.|\n[^\n\n])*(?=lastwindow: 0x$activewin)" | grep -o -P ".*(?= \()")
+class[$((activeworkspace - 1))]="active"
+
+if [[ $1 == "HDMI-1" ]]; then
+  for ((i = 0 ; i <= 4 ; i++)); do
+    if [[ -n $(hyprctl workspaces | grep -Po "(?<=ID )$((i + 1))") ]]; then
+      icons[$i]=""
+    fi
+  done
+
+  echo "(box :class \"workspaces-box\" :space-evenly false :spacing 8
+          (button :onclick \"hyprctl dispatch workspace 1\" (label :class \"workspacebtn ${class[0]} glyph\" :text \"${icons[0]}\"))
+          (button :onclick \"hyprctl dispatch workspace 2\" (label :class \"workspacebtn ${class[1]} glyph\" :text \"${icons[1]}\"))
+          (button :onclick \"hyprctl dispatch workspace 3\" (label :class \"workspacebtn ${class[2]} glyph\" :text \"${icons[2]}\"))
+          (button :onclick \"hyprctl dispatch workspace 4\" (label :class \"workspacebtn ${class[3]} glyph\" :text \"${icons[3]}\"))
+          (button :onclick \"hyprctl dispatch workspace 5\" (label :class \"workspacebtn ${class[4]} glyph\" :text \"${icons[4]}\")))"
+else
+  for ((i = 5 ; i <= 10 ; i++)); do
+    if [[ -n $(hyprctl workspaces | grep -Po "(?<=ID )$((i + 1))") ]]; then
+      icons[$i]=""
+    fi
+  done
+  echo "(box :class \"workspaces-box\" :space-evenly false :spacing 8
+          (button :onclick \"hyprctl dispatch workspace 6\" (label :class \"workspacebtn ${class[5]} glyph\" :text \"${icons[5]}\"))
+          (button :onclick \"hyprctl dispatch workspace 7\" (label :class \"workspacebtn ${class[6]} glyph\" :text \"${icons[6]}\"))
+          (button :onclick \"hyprctl dispatch workspace 8\" (label :class \"workspacebtn ${class[7]} glyph\" :text \"${icons[7]}\"))
+          (button :onclick \"hyprctl dispatch workspace 9\" (label :class \"workspacebtn ${class[8]} glyph\" :text \"${icons[8]}\"))
+          (button :onclick \"hyprctl dispatch workspace 10\" (label :class \"workspacebtn ${class[9]} glyph\" :text \"${icons[9]}\")))"
+fi

@@ -1,0 +1,76 @@
+* {
+  all: unset;
+  // font-family: "Liga SFMono Nerd Font Semi";
+  font-family: "FiraCode Nerd Font";
+  font-weight: 600;
+}
+
+@import "colors.scss";
+
+.main-box {
+  padding: 8px 8px;
+  border-radius: 5px;
+  background-color: rgba($bg, 0.75);
+}
+
+.color-box, 
+.title-box,
+.song-box,
+.workspaces-box,
+.memory-box,
+.cpu-box,
+.battery-box,
+.time-box {
+  font-size: 13px;
+  border-radius: 6;
+  margin: 0 5px;
+  padding: 5px 10px;
+}
+
+.title-box {
+  background-color: $blue;
+}
+
+.song-box {
+  background-color: $green;
+}
+
+.memory-box { 
+  background-color: $purple;
+}
+
+.cpu-box {
+  background-color: $red;
+}
+
+.battery-box {
+  background-color: $yellow;
+}
+
+.time-box { 
+  background-color: $cyan;
+}
+
+.workspaces-box {
+  background-color: $black;
+}
+
+.workspacebtn {
+  color: $purple;
+}
+
+.active {
+  color: $yellow;
+}
+
+.txt {
+  color: $black;
+}
+
+.glyph {
+  padding-right: 6px;
+}
+
+.debug {
+  border: solid 1px red;
+}

@@ -320,6 +320,22 @@ alias rmgitcache="rm -r ~/.cache/git"
 #moving your personal files and folders from /personal to ~
 alias personal='cp -Rf /personal/* ~'
 
+# vim
+alias nv='nvim'
+alias n='nvim'
+alias v='nvim'
+alias vim='nvim'
+
+# config
+alias brc='nvim ~/.config/bspwm/bspwmrc'
+alias kbrc='nvim ~/.config/bspwm/sxhkd/sxhkdrc'
+
+# cd
+alias config='cd ~/.config'
+
+# pip
+alias pip='python3 -m pip'
+
 #create a file called .bashrc-personal and put all your personal aliases
 #in there. They will not be overwritten by skel.
 

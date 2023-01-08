@@ -1,0 +1,69 @@
+(defpoll date :interval "1m" "date +%b%e")
+(defpoll hour :interval "5s" "date '+%I'")
+(defpoll min :interval "5s" "date '+%M'")
+(defpoll currentSong :interval "1s" `scripts/spotify`)
+(defpoll window_title :interval "100ms" `scripts/window-title-hyprland`)
+(defpoll workspaces-lvds :interval "100ms" "scripts/workspaces-hyprland LVDS-1")
+(defpoll workspaces-hdmi :interval "100ms" "scripts/workspaces-hyprland HDMI-1")
+
+(defwidget bar [workspaces]
+	(box :class "main-box" :orientation "h" :space-evenly true :valign "center" :height 30
+
+		; LEFT: Rofi, Workspaces
+		(box :orientation "h" :space-evenly false :valign "center" :spacing 10
+			(overlay 
+				(image :image-height 20 :style "margin-left: 5px; margin-right: 5px;" :path "images/launcher.svg")
+				(button :onclick "~/.config/rofi/bin/launcher &"))
+			(literal :content {workspaces})
+      (box :class "title-box" :space-evenly false :spacing 3
+        (label :class "txt glyph" :text "")
+        (label :class "txt" :text {window_title}))
+      )
+
+		; CENTER: Window Title
+		(box :valign "center" :halign "center"
+      (box :class "song-box" :space-evenly false :spacing 5
+        (label :class "txt glyph" :text "")
+        (button :onclick "playerctl play-pause -p spotify" (label :class "txt" :text {currentSong}))))
+
+		; RIGHT: Time, date,
+		(box  :valign "center" :halign "end" :space-evenly false
+			(box :class "memory-box" :space-evenly false :spacing 3
+				(label :class "txt glyph" :text "")
+				(label :class "txt" :limit-width 4 :show-truncated false :text "${EWW_RAM.used_mem/1024/1024}")
+				(label :class "txt unit" :text "MB"))
+			(box :class "cpu-box" :space-evenly false :spacing 3
+				(label :class "txt glyph" :text "")
+				(label :class "txt" :limit-width 4 :show-truncated false :text "${EWW_CPU.avg}")
+        (label :class "txt unit" :text "%"))
+			(box :class "battery-box" :space-evenly false :spacing 8
+				(label :class "txt glyph" :text "")
+				(label :class "txt" :limit-width 4 :show-truncated false :text "${EWW_BATTERY.BAT0.capacity}%"))
+			(box :class "time-box" :space-evenly false :spacing 3
+        (label :class "txt glyph" :text "")
+				(label :class "txt" :text "${date} | ${hour}:${min}")))
+	)
+)
+
+
+(defwindow bar-a
+	:monitor 0
+	:windowtype "dock"
+	:geometry (geometry 
+      :y "1%"
+			:width "98%"
+			:anchor "top center"
+			)
+	:exclusive true	
+	(bar :workspaces {workspaces-lvds}))
+
+(defwindow bar-b
+  :monitor 1
+  :windowtype "dock"
+  :geometry (geometry 
+      :y "1%"
+      :width "98%"
+      :anchor "top center"
+      )
+  :exclusive true	
+  (bar :workspaces {workspaces-hdmi}))

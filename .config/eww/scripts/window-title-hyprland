@@ -1,0 +1,11 @@
+#!/bin/bash
+
+window=$(hyprctl activewindow | grep -o -P "(?<=class: ).*")
+
+if [[ -n "$window" ]]; then
+  echo "$window"
+else 
+  echo "Desktop"
+fi
+
+
