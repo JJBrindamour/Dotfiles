@@ -1,7 +1,7 @@
 #!/bin/bash
 
-icons=("" "" "" "" "" "" "" "" "" "")
-class=("" "" "" "" "" "" "" "" "" "" "")
+icons=("" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "")
+class=("" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "")
 
 activewin=$(hyprctl activewindow | grep -Po "(?<=Window ).*(?= ->)")
 if [[ "$activewin" == "" ]]; then
@@ -11,8 +11,8 @@ fi
 activeworkspace=$(hyprctl workspaces | pcregrep -Mo "(?<=workspace ID )(.|\n[^\n\n])*(?=lastwindow: 0x$activewin)" | grep -o -P ".*(?= \()")
 class[$((activeworkspace - 1))]="active"
 
-if [[ $1 == "HDMI-1" ]]; then
-  for ((i = 0 ; i <= 4 ; i++)); do
+if [[ $1 == "eDP-1" ]]; then
+  for ((i = 0 ; i <= 9 ; i++)); do
     if [[ -n $(hyprctl workspaces | grep -Po "(?<=ID )$((i + 1))") ]]; then
       icons[$i]=""
     fi
@@ -23,17 +23,30 @@ if [[ $1 == "HDMI-1" ]]; then
           (button :onclick \"hyprctl dispatch workspace 2\" (label :class \"workspacebtn ${class[1]} glyph\" :text \"${icons[1]}\"))
           (button :onclick \"hyprctl dispatch workspace 3\" (label :class \"workspacebtn ${class[2]} glyph\" :text \"${icons[2]}\"))
           (button :onclick \"hyprctl dispatch workspace 4\" (label :class \"workspacebtn ${class[3]} glyph\" :text \"${icons[3]}\"))
-          (button :onclick \"hyprctl dispatch workspace 5\" (label :class \"workspacebtn ${class[4]} glyph\" :text \"${icons[4]}\")))"
-else
-  for ((i = 5 ; i <= 10 ; i++)); do
-    if [[ -n $(hyprctl workspaces | grep -Po "(?<=ID )$((i + 1))") ]]; then
-      icons[$i]=""
-    fi
-  done
-  echo "(box :class \"workspaces-box\" :space-evenly false :spacing 8
+          (button :onclick \"hyprctl dispatch workspace 5\" (label :class \"workspacebtn ${class[4]} glyph\" :text \"${icons[4]}\"))
+          (label :class \"workspacebtn glyph\" :text \"\")
           (button :onclick \"hyprctl dispatch workspace 6\" (label :class \"workspacebtn ${class[5]} glyph\" :text \"${icons[5]}\"))
           (button :onclick \"hyprctl dispatch workspace 7\" (label :class \"workspacebtn ${class[6]} glyph\" :text \"${icons[6]}\"))
           (button :onclick \"hyprctl dispatch workspace 8\" (label :class \"workspacebtn ${class[7]} glyph\" :text \"${icons[7]}\"))
           (button :onclick \"hyprctl dispatch workspace 9\" (label :class \"workspacebtn ${class[8]} glyph\" :text \"${icons[8]}\"))
           (button :onclick \"hyprctl dispatch workspace 10\" (label :class \"workspacebtn ${class[9]} glyph\" :text \"${icons[9]}\")))"
+else
+  for ((i = 10 ; i <= 19 ; i++)); do
+    if [[ -n $(hyprctl workspaces | grep -Po "(?<=ID )$((i + 1))") ]]; then
+      icons[$i]=""
+    fi
+  done
+
+  echo "(box :class \"workspaces-box\" :space-evenly false :spacing 8
+          (button :onclick \"hyprctl dispatch workspace 11\" (label :class \"workspacebtn ${class[10]} glyph\" :text \"${icons[10]}\"))
+          (button :onclick \"hyprctl dispatch workspace 12\" (label :class \"workspacebtn ${class[11]} glyph\" :text \"${icons[11]}\"))
+          (button :onclick \"hyprctl dispatch workspace 13\" (label :class \"workspacebtn ${class[12]} glyph\" :text \"${icons[12]}\"))
+          (button :onclick \"hyprctl dispatch workspace 14\" (label :class \"workspacebtn ${class[13]} glyph\" :text \"${icons[13]}\"))
+          (button :onclick \"hyprctl dispatch workspace 15\" (label :class \"workspacebtn ${class[14]} glyph\" :text \"${icons[14]}\"))
+          (label :class \"workspacebtn glyph\" :text \"\")
+          (button :onclick \"hyprctl dispatch workspace 16\" (label :class \"workspacebtn ${class[15]} glyph\" :text \"${icons[15]}\"))
+          (button :onclick \"hyprctl dispatch workspace 17\" (label :class \"workspacebtn ${class[16]} glyph\" :text \"${icons[16]}\"))
+          (button :onclick \"hyprctl dispatch workspace 18\" (label :class \"workspacebtn ${class[17]} glyph\" :text \"${icons[17]}\"))
+          (button :onclick \"hyprctl dispatch workspace 19\" (label :class \"workspacebtn ${class[18]} glyph\" :text \"${icons[18]}\"))
+          (button :onclick \"hyprctl dispatch workspace 20\" (label :class \"workspacebtn ${class[19]} glyph\" :text \"${icons[19]}\")))"
 fi

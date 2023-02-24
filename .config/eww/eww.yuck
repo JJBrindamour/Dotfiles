@@ -3,7 +3,7 @@
 (defpoll min :interval "5s" "date '+%M'")
 (defpoll currentSong :interval "1s" `scripts/spotify`)
 (defpoll window_title :interval "100ms" `scripts/window-title-hyprland`)
-(defpoll workspaces-lvds :interval "100ms" "scripts/workspaces-hyprland LVDS-1")
+(defpoll workspaces-edp :interval "100ms" "scripts/workspaces-hyprland eDP-1")
 (defpoll workspaces-hdmi :interval "100ms" "scripts/workspaces-hyprland HDMI-1")
 
 (defwidget bar [workspaces]
@@ -11,9 +11,8 @@
 
 		; LEFT: Rofi, Workspaces
 		(box :orientation "h" :space-evenly false :valign "center" :spacing 10
-			(overlay 
-				(image :image-height 20 :style "margin-left: 5px; margin-right: 5px;" :path "images/launcher.svg")
-				(button :onclick "~/.config/rofi/bin/launcher &"))
+			(button :onclick "~/.config/rofi/bin/launcher &" 
+				(image :image-height 20 :style "margin-left: 5px; margin-right: 5px;" :path "images/launcher.svg"))
 			(literal :content {workspaces})
       (box :class "title-box" :space-evenly false :spacing 3
         (label :class "txt glyph" :text "")
@@ -28,14 +27,16 @@
 
 		; RIGHT: Time, date,
 		(box  :valign "center" :halign "end" :space-evenly false
-			(box :class "memory-box" :space-evenly false :spacing 3
-				(label :class "txt glyph" :text "")
-				(label :class "txt" :limit-width 4 :show-truncated false :text "${EWW_RAM.used_mem/1024/1024}")
-				(label :class "txt unit" :text "MB"))
-			(box :class "cpu-box" :space-evenly false :spacing 3
-				(label :class "txt glyph" :text "")
-				(label :class "txt" :limit-width 4 :show-truncated false :text "${EWW_CPU.avg}")
-        (label :class "txt unit" :text "%"))
+			(button :onclick "gnome-system-monitor &" 
+				(box :class "memory-box" :space-evenly false :spacing 3
+					(label :class "txt glyph" :text "")
+					(label :class "txt" :limit-width 4 :show-truncated false :text "${EWW_RAM.used_mem/1024/1024}")
+					(label :class "txt unit" :text "MB")))
+			(button :onclick "gnome-system-monitor &" 
+				(box :class "cpu-box" :space-evenly false :spacing 3
+					(label :class "txt glyph" :text "")
+					(label :class "txt" :limit-width 4 :show-truncated false :text "${EWW_CPU.avg}")
+        			(label :class "txt unit" :text "%")))
 			(box :class "battery-box" :space-evenly false :spacing 8
 				(label :class "txt glyph" :text "")
 				(label :class "txt" :limit-width 4 :show-truncated false :text "${EWW_BATTERY.BAT0.capacity}%"))
@@ -55,7 +56,7 @@
 			:anchor "top center"
 			)
 	:exclusive true	
-	(bar :workspaces {workspaces-lvds}))
+	(bar :workspaces {workspaces-edp}))
 
 (defwindow bar-b
   :monitor 1

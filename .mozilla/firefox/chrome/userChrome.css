@@ -1,0 +1,26 @@
+.titlebar-spacer {
+    width: 8px !important;
+}
+
+.tab-background:is([selected], [multiselected]) {
+    background: #303446 !important;
+    border: 1px solid #babbf1 !important;
+}
+
+.browser-toolbar {
+    background-color: #303446 !important;
+    background-image: none !important;
+}
+
+#urlbar-background {
+    border: none !important;
+}
+
+#urlbar[focused=true] {
+    border: 2px solid #babbf1 !important;
+    border-radius: 5px !important;
+}
+
+#navigator-toolbox {
+    border: none !important;
+}
